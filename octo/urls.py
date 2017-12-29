@@ -17,8 +17,11 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
-from potato.views import MainView
+from potato.views import MainView, LoginView, RegisterView, LogoutView
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('$^', MainView.as_view(), name='main'),
-] + static(settings.STATIC_URL, settings.STATIC_ROOT)
+    path('', MainView.as_view(), name='main'),
+    path('login', LoginView.as_view(), name='login'),
+    path('logout', LogoutView.as_view(), name='logout'),
+    path('register', RegisterView.as_view(), name='register'),
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
