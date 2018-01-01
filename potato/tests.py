@@ -2,7 +2,7 @@ from django.test import TestCase, RequestFactory
 from django.contrib.auth.models import User, AnonymousUser
 from django.urls import reverse
 
-from potato.views import MainView
+from potato.views import MainView, RegisterView
 
 
 class MainPageTest(TestCase):
@@ -26,3 +26,12 @@ class MainPageTest(TestCase):
         response = MainView.as_view()(request)
         self.assertEqual(response.status_code, 200)
         pass
+
+class RegisterPageTest(TestCase):
+    def setUp(self):
+        self.factory = RequestFactory()
+
+    def test_open_main_test_page(self):
+        request = self.factory.get(reverse('register'))
+        response = RegisterView.as_view()(request)
+        self.assertEqual(response.status_code, 200)
