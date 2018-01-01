@@ -29,3 +29,6 @@ class RegisterView(View):
     def get(self, request):
         form = UserCreationForm()
         return render(request, 'potato/register.html', {'form': form})
+
+class AccountView(View):
+    pass

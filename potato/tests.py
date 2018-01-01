@@ -1,3 +1,4 @@
+from django.contrib.auth.forms import UserCreationForm
 from django.test import TestCase, RequestFactory
 from django.contrib.auth.models import User, AnonymousUser
 from django.urls import reverse
@@ -35,3 +36,14 @@ class RegisterPageTest(TestCase):
         request = self.factory.get(reverse('register'))
         response = RegisterView.as_view()(request)
         self.assertEqual(response.status_code, 200)
+
+    def test_form_valid_data(self):
+        form = UserCreationForm({
+            'username': 'John',
+            'password1': 'testsuperpassword',
+            'password2': 'testsuperpassword',
+        })
+        self.assertTrue(form.is_valid())
+        user = form.save(commit=True)
+        self.assertEqual(user.username, 'John')
+

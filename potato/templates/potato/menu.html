@@ -1,7 +1,11 @@
 <h2>Menu</h2>
 <ul class="menu">
     <li><a href="{% url 'main' %}" class="nav-link">Main page</a></li>
-    <li><a href="{% url 'login' %}" class="nav-link">Log in</a></li>
+    {% if user %}
+    <li><a href="{% url 'account' %}" class="nav-link">Account</a></li>
     <li><a href="{% url 'logout' %}" class="nav-link">Log Out</a></li>
+    {% else %}
+    <li><a href="{% url 'login' %}" class="nav-link">Log in</a></li>
     <li><a href="{% url 'register' %}" class="nav-link">Register</a></li>
+    {% endif %}
 </ul>
