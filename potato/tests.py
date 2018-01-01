@@ -47,3 +47,16 @@ class RegisterPageTest(TestCase):
         user = form.save(commit=True)
         self.assertEqual(user.username, 'John')
 
+    def test_form_invalid_data(self):
+        form = UserCreationForm({
+            'username': 'John',
+            'password1': 'testsuperpassword',
+            'password2': 'testsuperpasswor',
+        })
+        self.assertFalse(form.is_valid())
+
+        form = UserCreationForm({
+            'password1': 'testsuperpassword',
+            'password2': 'testsuperpassword',
+        })
+        self.assertFalse(form.is_valid())
